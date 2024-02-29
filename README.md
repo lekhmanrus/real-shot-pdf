@@ -53,7 +53,7 @@ Use the extension to gather data from desired web portals and feed that data as 
    - Download the extension from the [Chrome Web Store]().
    - Add the extension to your Chrome browser.
    - If RealShotPDF is not yet available on the Chrome Web Store, you can download and manually install the extension follow the instructions below:
-      1. [Download RealShotPDF](https://github.com/lekhmanrus/real-shot-pdf/archive/refs/tags/v0.0.1.zip).
+      1. [Download RealShotPDF](https://github.com/lekhmanrus/real-shot-pdf/releases/download/v0.0.1/real-shot-pdf-v0.0.1.zip).
       2. Extract the contents of the zip file to a directory on your computer.
       3. Load Unpacked:
            - Open your Chrome browser and navigate to `chrome://extensions/`.
