@@ -1,0 +1,37 @@
+@use '@angular/material' as mat;
+@use 'variables' as rsp;
+
+// Plus imports for other components in your app.
+
+// Include the base styles for Angular Material core. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+@include mat.core;
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$rsp-primary: mat.define-palette(rsp.$primary-palette);
+$rsp-accent: mat.define-palette(rsp.$accent-palette);
+
+// The warn palette is optional (defaults to red).
+$rsp-warn: mat.define-palette(rsp.$warn-palette);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$rsp-theme: mat.define-light-theme((
+  color: (
+    primary: $rsp-primary,
+    accent: $rsp-accent,
+    warn: $rsp-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: -1
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($rsp-theme);
+
+:root {
+  --mdc-protected-button-label-text-transform: uppercase;
+}

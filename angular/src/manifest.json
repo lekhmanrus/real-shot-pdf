@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "RealShotPDF",
+  "short_name": "RealShotPDF",
+  "version": "0.0.1",
+  "description": "Simplify PDF creation from web content. Navigate and parse links, generate PDFs locally without external data transfer.",
+  "permissions": [
+    "activeTab",
+    "debugger",
+    "downloads"
+  ],
+  "action": {
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "24": "assets/icon24.png",
+      "32": "assets/icon32.png",
+      "48": "assets/icon48.png",
+      "72": "assets/icon72.png",
+      "96": "assets/icon96.png",
+      "128": "assets/icon128.png"
+    },
+    "default_popup": "index.html?#/popup",
+    "default_title": "RealShotPDF"
+  },
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png",
+    "256": "assets/icon256.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "offline_enabled": true,
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

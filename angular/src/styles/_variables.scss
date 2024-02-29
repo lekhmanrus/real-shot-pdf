@@ -1,0 +1,161 @@
+@use 'sass:map';
+
+// Primary palette
+$primary-palette: (
+  50: #e2e2e2,
+  100: #b8b8b8,
+  200: #888888,
+  300: #585858,
+  400: #353535,
+  500: #111111,
+  600: #0f0f0f,
+  700: #0c0c0c,
+  800: #0a0a0a,
+  900: #050505,
+  A100: #ff4e4e,
+  A200: #ff1b1b,
+  A400: #e70000,
+  A700: #ce0000,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff
+  )
+);
+
+@function primary-color($key: $primary-palette) {
+  @return map.get($primary-palette, $key);
+}
+
+@function primary-contrast($key: $primary-palette) {
+  @return map.get(map.get($primary-palette, contrast), $key);
+}
+
+// Accent palette
+$accent-palette: (
+  50: #fae5e5,
+  100: #f3bdbd,
+  200: #eb9191,
+  300: #e36565,
+  400: #dd4444,
+  500: #d72323,
+  600: #d31f1f,
+  700: #cd1a1a,
+  800: #c71515,
+  900: #be0c0c,
+  A100: #ffeaea,
+  A200: #ffb7b7,
+  A400: #ff8484,
+  A700: #ff6a6a,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+
+@function accent-color($key: $accent-palette) {
+  @return map.get($accent-palette, $key);
+}
+
+@function accent-contrast($key: $accent-palette) {
+  @return map.get(map.get($accent-palette, contrast), $key);
+}
+
+// Warn palette
+/* $warn-palette: (
+  50: #fff7e1,
+  100: #feeab4,
+  200: #fedd82,
+  300: #fdcf4f,
+  400: #fcc42a,
+  500: #fcba04,
+  600: #fcb303,
+  700: #fbab03,
+  800: #fba302,
+  900: #fa9401,
+  A100: #ffffff,
+  A200: #fff7ed,
+  A400: #ffdfba,
+  A700: #ffd4a1,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+); */
+$warn-palette: (
+  50: #fdfdec,
+  100: #fafbcf,
+  200: #f6f8b0,
+  300: #f2f590,
+  400: #f0f278,
+  500: #edf060,
+  600: #ebee58,
+  700: #e8ec4e,
+  800: #e5e944,
+  900: #e0e533,
+  A100: #ffffff,
+  A200: #fffff7,
+  A400: #fdffc4,
+  A700: #fdffab,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+
+@function warn-color($key: $warn-palette) {
+  @return map.get($warn-palette, $key);
+}
+
+@function warn-contrast($key: $warn-palette) {
+  @return map.get(map.get($warn-palette, contrast), $key);
+}
+
+$scrollbar-width: 5px;

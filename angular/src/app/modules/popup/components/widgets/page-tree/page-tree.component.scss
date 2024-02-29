@@ -1,0 +1,11 @@
+:host {
+  display: block;
+
+  mat-checkbox.checkbox-parent {
+    &,
+    & > ::ng-deep .mdc-form-field,
+    & > ::ng-deep .mdc-form-field > label {
+      @apply w-full;
+    }
+  }
+}

@@ -1,0 +1,83 @@
+<ng-container *ngIf="badge$ | async"></ng-container>
+
+<div class="mb-3">
+  <mat-checkbox class="!block" color="primary" [(ngModel)]="shouldMergePdfs"
+                [disabled]="isMergePdfsDisabled">
+    Merge into Single PDF?
+  </mat-checkbox>
+  <mat-checkbox class="!block" color="primary" [(ngModel)]="shouldIgnoreUrlAnchors">
+    Ignore URL Anchors?
+  </mat-checkbox>
+</div>
+
+<div class="h-1">
+  @if (pageLinks$ !== undefined) {
+    <ng-container *ngIf="pageLinks$ | async; else showLoading;"></ng-container>
+  }
+</div>
+
+@if (totalHosts) {
+  <div class="flex flex-col min-w-80">
+    <div class="text-sm">Please select all hosts you want to save as PDF.</div>
+    <div class="flex items-center text-base">
+      <div>Selected: </div>
+      <div class="flex items-center">
+        <div class="bg-accent-50 text-accent-700 inline-block min-w-8 text-center rounded-full border border-solid border-accent-200 mx-1 px-1.5 py-0.5 text-xs font-medium">
+          {{ selectedHosts().size }} / {{ totalHosts }}
+        </div>
+        <div class="text-accent-700">host{{ selectedHosts().size !== 1 ? 's' : '' }}</div>
+      </div>
+      <div class="text-primary-50 mx-3">|</div>
+      <div class="flex items-center">
+        <div class="bg-primary-50 text-primary-700 inline-block min-w-8 text-center rounded-full border border-solid border-primary-200 mx-1 px-1.5 py-0.5 text-xs font-medium">
+          {{ selectedPageNodes().size }} / {{ totalPages }}
+        </div>
+        <div class="text-primary-700">page{{ selectedPageNodes().size !== 1 ? 's' : '' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <rsp-page-tree class="max-h-80 overflow-y-auto" [(value)]="selectedNodes"></rsp-page-tree>
+}
+
+<div class="text-center my-3">
+  <button mat-raised-button color="primary" [disabled]="isSaving" (click)="saveAsPdfButton$.next()">
+    Save PDF{{ shouldMergePdfs ? '' : 's' }}
+  </button>
+</div>
+
+@if (isSaving) {
+  <span id="ProgressLabel" class="sr-only">Loading</span>
+
+  <span role="progressbar" aria-labelledby="ProgressLabel"
+        [attr.aria-valuenow]="progress | number: '1.0-0'"
+        class="block rounded bg-primary-50">
+    <span class="block h-4 rounded bg-primary-500 text-center text-[10px]/4"
+          [style.width]="progress + '%'">
+      <span class="font-bold text-primary-50" [class.text-accent-500]="progress < 15">
+        {{ visitedPageLinks.size }} / {{ this.selectedPageNodes().size }} ({{ progress | number: '1.0-0' }}%)
+      </span>
+    </span>
+  </span>
+}
+
+<div class="flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+  <div class="flex items-center justify-center bg-primary-500 px-1">
+    <mat-icon class="w-6 h-6 text-white fill-current">warning</mat-icon>
+  </div>
+  <div class="px-3 py-2 -mx-3">
+    <div class="mx-3">
+      <!-- <div class="text-lg font-semibold text-primary-500 dark:text-primary-400">
+        Warning!
+      </div> -->
+      <div class="text-sm text-gray-600 dark:text-gray-200">
+        <div>Do not close this popup.</div>
+        <div>All collected data will be lost, and you'll need to start again.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #showLoading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

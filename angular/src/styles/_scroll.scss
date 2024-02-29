@@ -1,0 +1,23 @@
+@use 'variables' as rsp;
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 4px rgba(rsp.primary-color(100), .3);
+}
+
+::-webkit-scrollbar {
+  background: rgba(rsp.primary-color(200), .2);
+  position: absolute;
+  width: rsp.$scrollbar-width;
+}
+
+::-webkit-scrollbar:hover {
+  display: block;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rsp.primary-color(100);
+}
+
+::-webkit-scrollbar:horizontal {
+  height: rsp.$scrollbar-width;
+}

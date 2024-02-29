@@ -1,0 +1,34 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+    <button mat-icon-button disabled></button>
+    <mat-checkbox class="checklist-leaf-node"
+                  [checked]="node.isChecked"
+                  [disabled]="node.isDisabled"
+                  (change)="toggleItemSelection(node)">
+      {{ node.name }}
+    </mat-checkbox>
+  </mat-tree-node>
+
+  <mat-tree-node *matTreeNodeDef="let node; when: hasChild;" matTreeNodePadding>
+    <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+      <mat-icon class="mat-icon-rtl-mirror">
+        {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+      </mat-icon>
+    </button>
+    <mat-checkbox class="checkbox-parent" [checked]="areAllDescendantsSelected(node)"
+                  [indeterminate]="areDescendantsPartiallySelected(node)"
+                  [disabled]="areAllDescendantsDisabled(node)"
+                  (change)="toggleParentSelection(node)">
+      <div class="flex items-center justify-between">
+        <div>{{ node.name }}</div>
+        @if (node.childCount) {
+          <div class="flex items-center">
+            <div class="bg-primary-50 text-primary-700 inline-block min-w-8 text-center rounded-full border border-solid border-primary-200 mx-1 px-1.5 py-0.5 text-xs font-medium">
+              {{ getDescendantsSelectedCount(node) }} / {{ node.childCount }}
+            </div>
+          </div>
+        }
+      </div>
+    </mat-checkbox>
+  </mat-tree-node>
+</mat-tree>

@@ -1,0 +1,12 @@
+@tailwind utilities;
+
+/* You can add global styles to this file, and also import other style files */
+@import 'variables';
+@import 'material';
+@import 'scroll';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
