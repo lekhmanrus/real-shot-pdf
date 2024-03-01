@@ -175,22 +175,27 @@ export class PopupPageComponent {
       this.pageNavigator$
         .asObservable()
         .pipe(
-          switchMap((pageUrl) => attachDebugger$.pipe(map((activeTab) => ({ activeTab, pageUrl })))),
-          switchMap(({ activeTab, pageUrl }) => bindCallback<[chrome.debugger.Debuggee, string, any], [any]>(chrome.debugger.sendCommand)({
-            tabId: activeTab.id
-          }, 'Page.navigate', { url: 'about:blank' })
-            .pipe(map((response) => ({ response, activeTab, pageUrl })))),
-          switchMap(({ activeTab, pageUrl }) => bindCallback<[chrome.debugger.Debuggee, string, any], [any]>(chrome.debugger.sendCommand)({
-            tabId: activeTab.id
-          }, 'Page.navigate', { url: pageUrl.toString() })
-            .pipe(map((response) => ({ response, pageUrl })))),
+          switchMap((pageUrl) => attachDebugger$
+            .pipe(map((activeTab) => ({ activeTab, pageUrl })))),
+          switchMap(({ activeTab, pageUrl }) =>
+            bindCallback<[chrome.debugger.Debuggee, string, any], [any]>(
+              chrome.debugger.sendCommand
+            )({ tabId: activeTab.id }, 'Page.navigate', { url: 'about:blank' })
+              .pipe(map((response) => ({ response, activeTab, pageUrl })))),
+          switchMap(({ activeTab, pageUrl }) =>
+            bindCallback<[chrome.debugger.Debuggee, string, any], [any]>(
+              chrome.debugger.sendCommand
+            )({ tabId: activeTab.id }, 'Page.navigate', { url: pageUrl.toString() })
+              .pipe(map((response) => ({ response, pageUrl })))),
           switchMap(({ pageUrl }) => this._parsePageLinks().pipe(map(() => pageUrl)))
         )
     )
       .pipe(
         switchMap((pageUrl) => attachDebugger$.pipe(map((activeTab) => ({ activeTab, pageUrl })))),
         switchMap(({ activeTab, pageUrl }) =>
-          bindCallback<[chrome.debugger.Debuggee, string, any], [{ data: string }]>(chrome.debugger.sendCommand)(
+          bindCallback<[chrome.debugger.Debuggee, string, any], [{ data: string }]>(
+            chrome.debugger.sendCommand
+          )(
             { tabId: activeTab.id },
             'Page.printToPDF',
             { printBackground: true, transferMode: 'ReturnAsBase64' }
@@ -285,7 +290,7 @@ export class PopupPageComponent {
         // tap(() => console.log('chrome.runtime.lastError', chrome.runtime.lastError)),
         map((message) => chrome.runtime.lastError
           ? throwError(() => new WebTransportError(
-              'The current page is protected by the browser. Error: ' + chrome.runtime.lastError
+              `The current page is protected by the browser. Error: ${chrome.runtime.lastError}`
             ))
           : JSON.parse(message)
         ),
@@ -299,7 +304,7 @@ export class PopupPageComponent {
         tap((links) => this._pageDatabaseService.insertBulk(links)),
         tap(() => this._detectChanges()),
         share()
-      ) as Observable<URL[]>;
+      );
     return this.pageLinks$;
   }
 

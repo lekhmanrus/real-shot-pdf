@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { find, forOwn, groupBy } from 'lodash-es';
+import { forOwn, groupBy } from 'lodash-es';
 import { BehaviorSubject } from 'rxjs';
 import { PageTreeNodeModel } from '../models/page-tree-node.model';
 
@@ -39,7 +39,10 @@ export class PageDatabaseService {
     this.dataChange.next(this.data);
   }
 
-  public insertBulkNodes(nodes: PageTreeNodeModel[], parent: PageTreeNodeModel | null = null): void {
+  public insertBulkNodes(
+    nodes: PageTreeNodeModel[],
+    parent: PageTreeNodeModel | null = null
+  ): void {
     if (!parent) {
       for (const node of nodes) {
         const rootNode = this.data.find((item) => item.value === node.value);

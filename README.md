@@ -11,6 +11,12 @@
   </em>
 </p>
 
+<p align="center">
+  <a href="https://github.com/lekhmanrus/real-shot-pdf/actions/workflows/build.yml">
+    <img src="https://github.com/lekhmanrus/real-shot-pdf/actions/workflows/build.yml/badge.svg?branch=main" alt="Build" />
+  </a>
+</p>
+
 
 <hr />
 

@@ -3,6 +3,7 @@
 # compiled output
 .firebase/
 .angular/
+.nx/
 dist
 # dependencies
 node_modules

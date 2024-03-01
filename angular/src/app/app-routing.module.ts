@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'popup',
-    loadChildren: () => import('./modules/popup/popup.module').then((module) => module.PopupModule)
+    loadChildren: async () => import('./modules/popup/popup.module')
+      .then((module) => module.PopupModule)
   }
 ];
 
